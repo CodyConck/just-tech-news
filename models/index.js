@@ -1,11 +1,10 @@
-//imports User model from ./User file in models directory
-const User = require('./User');
-
 //imports Post model from ./Post file in models directory
 const Post = require('./Post');
-
+//imports User model from ./User file in models directory
+const User = require('./User');
 //imports vote model from ./Vote file in models directory
 const Vote = require('./Vote');
+const Comment = require('./Comment');
 
 //create model associations between models User and Post (this is a one-to-many relationship) This association creates the reference for the id column in the User model to link to the corresponding foreign key pair, which is the user_id in the Post model.
 User.hasMany(Post, {
@@ -51,5 +50,20 @@ Post.hasMany(Vote, {
     foreignKey: 'post_id'
 });
 
+Comment.belongsTo(User, {
+    foreignKey: 'user_id'
+});
+  
+Comment.belongsTo(Post, {
+    foreignKey: 'post_id'
+});
+  
+User.hasMany(Comment, {
+    foreignKey: 'user_id'
+});
+  
+Post.hasMany(Comment, {
+    foreignKey: 'post_id'
+});
 
-module.exports = { User, Post, Vote };
+module.exports = { User, Post, Vote, Comment };
