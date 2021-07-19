@@ -14,13 +14,15 @@ User.hasMany(Post, {
 //make the reverse association, definite relationship of the post model to the user model. Inferred constraint is that a post can belong to one user, but not many users.
 Post.belongsTo(User, {
     foreignKey: 'user_id',
+    onDelete: 'SET NULL'
 })
 
 //associates User and Post to one another so that when we query User, we will see all of the posts they've voted on
 User.belongsToMany(Post, {
     through: Vote,
     as: 'voted_posts',
-    foreignKey: 'user_id'
+    foreignKey: 'user_id', 
+    onDelete: 'SET NULL'
 })
 
 //double check that the above and below comments dont need to be switched
@@ -29,17 +31,20 @@ User.belongsToMany(Post, {
 Post.belongsToMany(User, {
     through: Vote,
     as: 'voted_posts',
-    foreignKey: 'post_id'
+    foreignKey: 'post_id',
+    onDelete: 'SET NULL'
 });
 
 //associations will let us see total # of votes on a post
 //will also connect User to Vote directly
 Vote.belongsTo(User, {
-    foreignKey: 'user_id'
+    foreignKey: 'user_id',
+    onDelete: 'SET NULL'
 });
 
 Vote.belongsTo(Post, {
-    foreignKey: 'post_id'
+    foreignKey: 'post_id',
+    onDelete: 'SET NULL'
 });
 
 User.hasMany(Vote, {
@@ -51,15 +56,18 @@ Post.hasMany(Vote, {
 });
 
 Comment.belongsTo(User, {
-    foreignKey: 'user_id'
+    foreignKey: 'user_id',
+    onDelete: 'SET NULL'
 });
   
 Comment.belongsTo(Post, {
-    foreignKey: 'post_id'
+    foreignKey: 'post_id',
+    onDelete: 'SET NULL'
 });
   
 User.hasMany(Comment, {
-    foreignKey: 'user_id'
+    foreignKey: 'user_id',
+    onDelete: 'SET NULL'
 });
   
 Post.hasMany(Comment, {

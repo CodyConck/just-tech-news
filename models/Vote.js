@@ -14,7 +14,6 @@ Vote.init(
         //user_id field that holds primary key value of a user, used to indicate ownership by the User model. Connects Vote model data with User model
         user_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             references: {
                 model: 'user',
                 key: 'id'
@@ -23,7 +22,6 @@ Vote.init(
         //same as above, relates Vote model data to Post model
         post_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             references: {
                 model: 'post',
                 key: 'id'
